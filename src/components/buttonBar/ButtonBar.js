@@ -1,28 +1,22 @@
-import styles from './ButtonBar.module.css';
-import globals from '../../App.module.css'
+import styles from "./ButtonBar.module.css";
+import IconButton from "../UI/card/iconButton/IconButton";
 
 const ButtonBar = () => {
+  const iconNames = [
+    "far fa-user",
+    "far fa-envelope",
+    "far fa-calendar-alt",
+    "fas fa-map-marked-alt",
+    "fas fa-phone-alt",
+    "fas fa-lock"
+  ];
   return (
     <div className={styles.button_section}>
-        
-      <div className={`${styles.button_bar} ${globals.centered_section}`}>
-        <div className={`${styles.button} b1 ${globals.centered_section}`}>
-          <i className="far fa-user"></i>
-        </div>
-        <div className={`${styles.button} b2 ${globals.centered_section}`}>
-          <i className="far fa-envelope"></i>
-        </div>
-        <div className={`${styles.button} b3 ${globals.centered_section}`}>
-          <i className="far fa-calendar-alt"></i>
-        </div>
-        <div className={`${styles.button} b4 ${globals.centered_section}`}>
-          <i className="fas fa-map-marked-alt"></i>
-        </div>
-        <div className={`${styles.button} b5 ${globals.centered_section}`}>
-          <i className="fas fa-phone-alt"></i>
-        </div>
-        <div className={`${styles.button} b6 ${globals.centered_section}`}>
-          <i className="fas fa-lock"></i>
+      <div className={styles.button_bar}>
+        <div className={styles.buttons}>
+          {iconNames.map((iconName, idx) => {
+            return <IconButton key={idx} i={idx} iconName={iconName} />;
+          })}
         </div>
       </div>
     </div>

@@ -1,15 +1,17 @@
 .button_section {
     height: 15vh;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .button_bar {
-    height: 100%;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin: 0 12vw;
+    width: 60%;
 }
-.button {
-    font-size: 6vw;
-    color: gray;
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
