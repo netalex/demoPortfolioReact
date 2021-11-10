@@ -1,0 +1,11 @@
+.button_section {
+    height: 15vh;
+}
+
+.button_bar {
+    height: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 0 12vw;
+}
