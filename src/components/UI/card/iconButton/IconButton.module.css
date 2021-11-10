@@ -22,3 +22,13 @@
   border-right: 1vw solid transparent;
   border-bottom: 1vw solid green;
 }
+
+
+.selected .arrow {
+    visibility: visible;
+}
+
+.selected .i {
+    border-top: 0.4vh solid green;
+    color: green;
+}

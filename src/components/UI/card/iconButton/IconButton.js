@@ -1,10 +1,19 @@
-import styles from './IconButton.module.css'
+import styles from "./IconButton.module.css";
+import {useState} from "react";
+
 const IconButton = (props) => {
-    return (
-        <div className={`${styles.button} b${props.i}`}>
-            <div className={styles.arrow} />
-            <i className={`${styles.i} ${props.iconName}`} />
-          </div>
-    );
-}
+  const [hover, setHover] = useState(false);
+  const toggleHover = () => setHover(!hover);
+
+  return (
+    <div
+      className={`${styles.button} b${props.i} ${hover && styles.selected}`}
+      onMouseEnter={toggleHover}
+      onMouseLeave={toggleHover}
+    >
+      <div className={styles.arrow} />
+      <i className={`${styles.i} ${props.iconName}`} />
+    </div>
+  );
+};
 export default IconButton;
