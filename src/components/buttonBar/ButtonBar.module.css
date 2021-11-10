@@ -9,3 +9,7 @@
     justify-content: space-around;
     margin: 0 12vw;
 }
+.button {
+    font-size: 6vw;
+    color: gray;
+}
