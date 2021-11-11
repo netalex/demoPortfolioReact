@@ -20,6 +20,7 @@ function App() {
   const [sectionSelected, setSectionSelected] = useState(null);
   const [text, setText] = useState("");
   const [value, setValue] = useState("");
+  const [dataLive, setDataLive] = useState(null);
   const iconNames = [
     "far fa-user",
     "far fa-envelope",
@@ -28,7 +29,17 @@ function App() {
     "fas fa-phone-alt",
     "fas fa-lock"
   ];
+  
   const user = data.results[0];
+  
+  useEffect(()=>{
+    fetch('https://randomuser.me/api')
+    .then((Response)=>Response.json())
+    .then((dataRes) => setDataLive(dataRes))
+  }, []);
+  
+  // const user = dataLive.length > 0 && dataLive?.results[0];
+  
   useEffect(() => {
 
     switch (sectionSelected) {
@@ -71,6 +82,7 @@ function App() {
   const getButton = (e) => {
     console.log(e);
     setSectionSelected(e);
+    console.log(dataLive)
   };
   return (
     <Wrapper>
