@@ -1,11 +1,11 @@
 import {useEffect, useState} from "react";
-import './App.module.css';
-import Wrapper from './components/wrapper/Wrapper';
-import Card from './components/UI/card/Card';
-import ImageBar from './components/imageBar/ImageBar';
-import ShowData from './components/showdata/ShowData';
-import ButtonBar from './components/buttonBar/ButtonBar';
-import data from './asset/dummyData.json';
+import "./App.module.css";
+import Wrapper from "./components/wrapper/Wrapper";
+import Card from "./components/UI/card/Card";
+import ImageBar from "./components/imageBar/ImageBar";
+import ShowData from "./components/showdata/ShowData";
+import ButtonBar from "./components/buttonBar/ButtonBar";
+import data from "./asset/dummyData.json";
 
 /**
  * 0 - name
@@ -29,48 +29,66 @@ function App() {
     "fas fa-lock"
   ];
   const user = data.results[0];
-  useEffect(()=>{
+  useEffect(() => {
     let text = "";
     let value = "";
     switch (sectionSelected) {
       case 0:
-        setText('Hello! My name is');
+        setText("Hello! My name is");
         setValue(`${user.name.title} ${user.name.first} ${user.name.last}`);
         break;
       case 1:
-        setText('My Email address is');
+        setText("My Email address is");
         setValue(`${user.email}`);
         break;
       case 2:
-        setText('My birthday date is');
+        setText("My birthday date is");
         setValue(new Date(user.dob.date).toLocaleDateString());
         break;
-        case 3:
-        setText('My Address is');
-        setValue(`${user.location.street.number}, ${user.location.street.name}`);
+      case 3:
+        setText("My Address is");
+        setValue(
+          `${user.location.street.number}, ${user.location.street.name}`
+        );
         break;
       case 4:
-        setText('My phone number is');
-        setValue(user.phone); // TODO: format string (xx) - xx - xx - xx
+        setText("My phone number is");
+        const phone = user.phone.split("-");
+        const prefix = phone.shift();
+        setValue(`(${prefix})-${phone.join('-').toString()}`);
         break;
       case 5:
-        setText('My password is');
+        setText("My password is");
         setValue(user.login.password);
         break;
-    
+
       default:
         break;
     }
-  });
-  const getButton = (e) => {console.log(e); setSectionSelected(e);};
+  }, [
+    sectionSelected,
+    user.name.title,
+    user.name.first,
+    user.name.last,
+    user.email,
+    user.dob.date,
+    user.location.street.number,
+    user.location.street.name,
+    user.phone,
+    user.login.password
+  ]);
+  const getButton = (e) => {
+    console.log(e);
+    setSectionSelected(e);
+  };
   return (
-   <Wrapper>
-     <Card>
-       <ImageBar imgpath={user.picture.large} />
-       <ShowData text={text} value={value}/>
-       <ButtonBar onGetButton={getButton} iconNames={iconNames}/>
-     </Card>
-   </Wrapper>
+    <Wrapper>
+      <Card>
+        <ImageBar imgpath={user.picture.large} />
+        <ShowData text={text} value={value} />
+        <ButtonBar onGetButton={getButton} iconNames={iconNames} />
+      </Card>
+    </Wrapper>
   );
 }
 
