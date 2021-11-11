@@ -30,8 +30,7 @@ function App() {
   ];
   const user = data.results[0];
   useEffect(() => {
-    let text = "";
-    let value = "";
+
     switch (sectionSelected) {
       case 0:
         setText("Hello! My name is");
@@ -67,15 +66,7 @@ function App() {
     }
   }, [
     sectionSelected,
-    user.name.title,
-    user.name.first,
-    user.name.last,
-    user.email,
-    user.dob.date,
-    user.location.street.number,
-    user.location.street.name,
-    user.phone,
-    user.login.password
+    user
   ]);
   const getButton = (e) => {
     console.log(e);
