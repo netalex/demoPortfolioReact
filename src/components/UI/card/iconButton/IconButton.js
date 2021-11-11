@@ -5,7 +5,7 @@ const IconButton = (props) => {
   const [hover, setHover] = useState(false);
   const toggleHover = () => {
     setHover(!hover);
-    {hover && props.onHover(props.i)};
+    {!hover && props.onHover(props.i)};
   };
 
   return (
