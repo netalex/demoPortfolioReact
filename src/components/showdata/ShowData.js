@@ -3,11 +3,11 @@ import globals from '../../App.module.css';
 import DataText from '../data/DataText';
 import DataValue from '../data/DataValue';
 
-const ShowData = () => {
+const ShowData = (props) => {
   return (
     <div className={`${styles.showdata_section} ${globals.centered_section}`}>
-      <DataText text={"My phone number is"} />
-      <DataValue value="(03)-22-48-30-73"/>
+      <DataText text={props.text} />
+      <DataValue value={props.value} />
     </div>
   );
 };

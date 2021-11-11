@@ -3,7 +3,10 @@ import {useState} from "react";
 
 const IconButton = (props) => {
   const [hover, setHover] = useState(false);
-  const toggleHover = () => setHover(!hover);
+  const toggleHover = () => {
+    setHover(!hover);
+    props.onHover(props.i);
+  };
 
   return (
     <div
