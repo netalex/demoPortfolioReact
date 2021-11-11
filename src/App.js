@@ -5,7 +5,6 @@ import Card from "./components/UI/card/Card";
 import ImageBar from "./components/imageBar/ImageBar";
 import ShowData from "./components/showdata/ShowData";
 import ButtonBar from "./components/buttonBar/ButtonBar";
-import data from "./asset/dummyData.json";
 
 /**
  * 0 - name
@@ -20,7 +19,11 @@ function App() {
   const [sectionSelected, setSectionSelected] = useState(null);
   const [text, setText] = useState("");
   const [value, setValue] = useState("");
+  const [pic, setPic] = useState("");
   const [dataLive, setDataLive] = useState(null);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const iconNames = [
     "far fa-user",
     "far fa-envelope",
@@ -29,68 +32,91 @@ function App() {
     "fas fa-phone-alt",
     "fas fa-lock"
   ];
-  
-  const user = data.results[0];
-  
-  useEffect(()=>{
-    fetch('https://randomuser.me/api')
-    .then((Response)=>Response.json())
-    .then((dataRes) => setDataLive(dataRes))
-  }, []);
-  
-  // const user = dataLive.length > 0 && dataLive?.results[0];
-  
-  useEffect(() => {
 
+  useEffect(() => {
+    const URI = "https://randomuser.me/api";
+
+    const fetchAsync = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(URI);
+        const dataRes = await res.json();
+        setDataLive(dataRes);
+      } catch (error) {
+        setError(true);
+      }
+      setLoading(false);
+    };
+
+    fetchAsync();
+  }, []);
+
+  // const user = dataLive?.results[0];
+
+  useEffect(() => {
+    setPic(dataLive?.results[0].picture.large)
     switch (sectionSelected) {
       case 0:
         setText("Hello! My name is");
-        setValue(`${user.name.title} ${user.name.first} ${user.name.last}`);
+        setValue(
+          `${dataLive?.results[0].name.title} ${dataLive?.results[0].name.first} ${dataLive?.results[0].name.last}`
+        );
         break;
       case 1:
         setText("My Email address is");
-        setValue(`${user.email}`);
+        setValue(`${dataLive?.results[0].email}`);
         break;
       case 2:
         setText("My birthday date is");
-        setValue(new Date(user.dob.date).toLocaleDateString());
+        setValue(new Date(dataLive?.results[0].dob.date).toLocaleDateString());
         break;
       case 3:
         setText("My Address is");
         setValue(
-          `${user.location.street.number}, ${user.location.street.name}`
+          `${dataLive?.results[0].location.street.number}, ${dataLive?.results[0].location.street.name}`
         );
         break;
       case 4:
         setText("My phone number is");
-        const phone = user.phone.split("-");
-        const prefix = phone.shift();
-        setValue(`(${prefix})-${phone.join('-').toString()}`);
+        // const phone = dataLive?.results[0].phone.split("-");
+        // const prefix = phone.shift();
+        // setValue(`(${prefix})-${phone.join("-").toString()}`);
+        setValue(`${dataLive?.results[0].phone}`)
         break;
       case 5:
         setText("My password is");
-        setValue(user.login.password);
+        setValue(dataLive?.results[0].login.password);
         break;
-
       default:
+        setText('');
+        setValue('');
         break;
     }
-  }, [
-    sectionSelected,
-    user
-  ]);
+  }, [sectionSelected, dataLive]);
+
   const getButton = (e) => {
-    console.log(e);
     setSectionSelected(e);
-    console.log(dataLive)
   };
+
   return (
     <Wrapper>
-      <Card>
-        <ImageBar imgpath={user.picture.large} />
-        <ShowData text={text} value={value} />
-        <ButtonBar onGetButton={getButton} iconNames={iconNames} />
-      </Card>
+      {!error && !loading && (
+        <Card>
+          <ImageBar imgpath={pic} />
+          <ShowData text={text} value={value} />
+          <ButtonBar onGetButton={getButton} iconNames={iconNames} />
+        </Card>
+      )}
+      {error && (
+        <Card>
+          <h1>ERRORE INTERNET!</h1>
+        </Card>
+      )}
+      {loading && (
+        <Card>
+          <h1>Wait for it...</h1>
+        </Card>
+      )}
     </Wrapper>
   );
 }
