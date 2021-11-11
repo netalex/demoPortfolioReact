@@ -1,0 +1,18 @@
+.messagePar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: auto;
+  align-self: center;
+  justify-self: center;
+  height: 66vh;
+  font-size: 12vh;
+}
+.error {
+  color: red;
+}
+
+.wait{
+    color: gray;
+}

@@ -5,6 +5,7 @@ import Card from "./components/UI/card/Card";
 import ImageBar from "./components/imageBar/ImageBar";
 import ShowData from "./components/showdata/ShowData";
 import ButtonBar from "./components/buttonBar/ButtonBar";
+import ServiceMessage from "./components/UI/serviceMessage/ServiceMessage"
 
 /**
  * 0 - name
@@ -109,12 +110,12 @@ function App() {
       )}
       {error && (
         <Card>
-          <h1>ERRORE INTERNET!</h1>
+          <ServiceMessage msg="ERRORE INTERNET!" type="error" />
         </Card>
       )}
       {loading && (
         <Card>
-          <h1>Wait for it...</h1>
+          <ServiceMessage msg="Wait for it..." type="wait" />
         </Card>
       )}
     </Wrapper>
