@@ -8,7 +8,6 @@ import ButtonBar from './components/buttonBar/ButtonBar';
 import data from './asset/dummyData.json';
 
 /**
- * 
  * 0 - name
  * 1 - email
  * 2 - birthday
@@ -44,7 +43,7 @@ function App() {
         break;
       case 2:
         setText('My birthday date is');
-        setValue(user.dob.date); // TODO: convert in d/m/yyyy
+        setValue(new Date(user.dob.date).toLocaleDateString()); // TODO: convert in d/m/yyyy
         break;
         case 3:
         setText('My Address is');
