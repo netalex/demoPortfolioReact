@@ -1,3 +1,14 @@
+# portfolio demo excercise
+
+project aim to render a little card portfolio using react.js.
+the tests are disabled.
+
+## mockup:
+
+![mockup](screenshot.gif)
+![mockup](screenshot_proportion.gif)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
