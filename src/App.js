@@ -5,16 +5,10 @@ import Card from "./components/UI/card/Card";
 import ImageBar from "./components/imageBar/ImageBar";
 import ShowData from "./components/showdata/ShowData";
 import ButtonBar from "./components/buttonBar/ButtonBar";
-import ServiceMessage from "./components/UI/serviceMessage/ServiceMessage"
-
-/**
- * 0 - name
- * 1 - email
- * 2 - birthday
- * 3 - address
- * 4 - phone
- * 5 - password
- */
+import ServiceMessage from "./components/UI/serviceMessage/ServiceMessage";
+import {URI} from "./constants/api";
+import {TEXT} from "./constants/text";
+import {iconNames} from "./constants/iconNames";
 
 function App() {
   const [sectionSelected, setSectionSelected] = useState(null);
@@ -25,18 +19,7 @@ function App() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const iconNames = [
-    "far fa-user",
-    "far fa-envelope",
-    "far fa-calendar-alt",
-    "fas fa-map-marked-alt",
-    "fas fa-phone-alt",
-    "fas fa-lock"
-  ];
-
   useEffect(() => {
-    const URI = "https://randomuser.me/api";
-
     const fetchAsync = async () => {
       setLoading(true);
       try {
@@ -52,45 +35,45 @@ function App() {
     fetchAsync();
   }, []);
 
-  // const user = dataLive?.results[0];
-
   useEffect(() => {
-    setPic(dataLive?.results[0].picture.large)
+    setPic(dataLive?.results[0].picture.large);
     switch (sectionSelected) {
       case 0:
-        setText("Hello! My name is");
+        setText(TEXT.NAME);
         setValue(
           `${dataLive?.results[0].name.title} ${dataLive?.results[0].name.first} ${dataLive?.results[0].name.last}`
         );
         break;
       case 1:
-        setText("My Email address is");
+        setText(TEXT.EMAIL);
         setValue(`${dataLive?.results[0].email}`);
         break;
       case 2:
-        setText("My birthday date is");
+        setText(TEXT.BDAY);
         setValue(new Date(dataLive?.results[0].dob.date).toLocaleDateString());
         break;
       case 3:
-        setText("My Address is");
+        setText(TEXT.ADDRESS);
         setValue(
           `${dataLive?.results[0].location.street.number}, ${dataLive?.results[0].location.street.name}`
         );
         break;
       case 4:
-        setText("My phone number is");
+        setText(TEXT.PHONE);
+        /* knowing all the phone number's formats used by the API
+         *  we can write a formatting function to normalize them */
         // const phone = dataLive?.results[0].phone.split("-");
         // const prefix = phone.shift();
         // setValue(`(${prefix})-${phone.join("-").toString()}`);
-        setValue(`${dataLive?.results[0].phone}`)
+        setValue(`${dataLive?.results[0].phone}`);
         break;
       case 5:
-        setText("My password is");
+        setText(TEXT.PWD);
         setValue(dataLive?.results[0].login.password);
         break;
       default:
-        setText('');
-        setValue('');
+        setText("");
+        setValue("");
         break;
     }
   }, [sectionSelected, dataLive]);
