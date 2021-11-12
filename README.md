@@ -6,7 +6,12 @@ the tests are disabled.
 ## mockup:
 
 ![mockup](screenshot.gif)
+
+## individuazione di massima dei componenti principali:
 ![mockup](screenshot_proportion.gif)
+
+# primo rendering statico html per stilare il css:
+ [github](https://github.com/netalex/demoPortfolioSD21/tree/master/html)
 
 
 # Getting Started with Create React App
