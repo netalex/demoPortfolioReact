@@ -1,22 +1,20 @@
 import styles from "./IconButton.module.css";
-import {useState} from "react";
 
 const IconButton = (props) => {
-  const [status, setStatus] = useState(false);
-  const {onHover, i, iconName} = props;
+  const {onHover, i, iconName, stat} = props;
+  let hover = stat;
   const hoverIn = () => {
-    setStatus(status => !status);
-    !status && onHover(i);
+     onHover(i);
   };
   const hoverOut= () => {
-    setStatus(status => !status);
+    hover = !hover;
   }
 
   return (
     <div
-      className={`${styles.button} b${i} ${status && styles.selected}`}
+      className={`${styles.button} b${i} ${/* status */ hover && styles.selected}`}
       onMouseEnter={hoverIn}
-      // onMouseLeave={hoverOut}
+      onMouseLeave={hoverOut}
     >
       <div className={styles.arrow} />
       <i className={`${styles.i} ${iconName}`} />

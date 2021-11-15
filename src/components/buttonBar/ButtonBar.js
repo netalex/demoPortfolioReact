@@ -3,7 +3,7 @@ import IconButton from "../UI/iconButton/IconButton";
 
 const ButtonBar = (props) => {
 
-  const {iconNames, onGetButton} = props;
+  const {iconNames, onGetButton, sectionSelected} = props;
 
   return (
     <div className={styles.button_section}>
@@ -15,6 +15,7 @@ const ButtonBar = (props) => {
             i={idx} 
             iconName={iconName} 
             onHover={onGetButton}
+            stat={sectionSelected===idx ? true : false}
             />;
           })}
         </div>

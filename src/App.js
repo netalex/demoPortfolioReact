@@ -92,7 +92,7 @@ function App() {
         <>
           <ImageBar imgpath={pic} />
           <ShowContent text={text} value={value} />
-          <ButtonBar onGetButton={getButton} iconNames={iconNames} />
+          <ButtonBar onGetButton={getButton} iconNames={iconNames} sectionSelected={sectionSelected} />
         </>
       );
     }
