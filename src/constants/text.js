@@ -6,3 +6,6 @@ export const TEXT = {
     PHONE: 'My phone number is',
     PWD: 'My password is'
 }
+
+
+export const IMAGE_ALT_TEXT = 'big profile face';

@@ -1,17 +1,17 @@
 import {useEffect, useState} from "react";
 import "./App.module.css";
-import Wrapper from "./components/wrapper/Wrapper";
+import Wrapper from "./components/layout/wrapper/Wrapper";
 import Card from "./components/UI/card/Card";
 import ImageBar from "./components/imageBar/ImageBar";
-import ShowData from "./components/showdata/ShowData";
+import ShowContent from "./components/showcontent/ShowContent";
 import ButtonBar from "./components/buttonBar/ButtonBar";
-import ServiceMessage from "./components/UI/serviceMessage/ServiceMessage";
+import Message from "./components/UI/message/Message";
 import {URI} from "./constants/api";
 import {TEXT} from "./constants/text";
 import {iconNames} from "./constants/iconNames";
 
 function App() {
-  const [sectionSelected, setSectionSelected] = useState(null);
+  const [sectionSelected, setSectionSelected] = useState(0);
   const [text, setText] = useState("");
   const [value, setValue] = useState("");
   const [pic, setPic] = useState("");
@@ -82,25 +82,25 @@ function App() {
     setSectionSelected(e);
   };
 
+  const content = () => {
+    if (loading) {
+      return (<Message msg="Wait for it..." type="wait" />);
+    } else if (error) {
+      return (<Message msg="ERRORE INTERNET!" type="error" />);
+    } else {
+      return (
+        <>
+          <ImageBar imgpath={pic} />
+          <ShowContent text={text} value={value} />
+          <ButtonBar onGetButton={getButton} iconNames={iconNames} />
+        </>
+      );
+    }
+  };
+
   return (
     <Wrapper>
-      {!error && !loading && (
-        <Card>
-          <ImageBar imgpath={pic} />
-          <ShowData text={text} value={value} />
-          <ButtonBar onGetButton={getButton} iconNames={iconNames} />
-        </Card>
-      )}
-      {error && (
-        <Card>
-          <ServiceMessage msg="ERRORE INTERNET!" type="error" />
-        </Card>
-      )}
-      {loading && (
-        <Card>
-          <ServiceMessage msg="Wait for it..." type="wait" />
-        </Card>
-      )}
+      <Card>{content()}</Card>
     </Wrapper>
   );
 }

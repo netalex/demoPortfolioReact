@@ -1,18 +1,20 @@
 import styles from "./ButtonBar.module.css";
-import IconButton from "../UI/card/iconButton/IconButton";
+import IconButton from "../UI/iconButton/IconButton";
 
 const ButtonBar = (props) => {
+
+  const {iconNames, onGetButton} = props;
 
   return (
     <div className={styles.button_section}>
       <div className={styles.button_bar}>
         <div className={styles.buttons}>
-          {props.iconNames.map((iconName, idx) => {
+          {iconNames.map((iconName, idx) => {
             return <IconButton 
             key={idx} 
             i={idx} 
             iconName={iconName} 
-            onHover={props.onGetButton}
+            onHover={onGetButton}
             />;
           })}
         </div>
